@@ -2,9 +2,9 @@
   <div>
     <form @submit.prevent="processInput">
       <input type="text" v-model="input" name="input" placeholder="Enter a location" />
-      <button type="submit"></button>
+      <button type="submit">Submit</button>
     </form>
-    <h1 v-hide="recived ">Enter a Location</h1>
+    <h1 class="enterLocation" v-show="!recieved">Enter a Location</h1>
     <div v-show="recieved" class="currentWrapper">
       <h1 v-if="recieved">{{currentWeather.location.name}},{{currentWeather.location.region}}</h1>
       <h3 v-if="recieved">{{currentWeather.current.temp_f}}degrees</h3>
@@ -39,6 +39,7 @@ export default {
     processInput: function() {
       this.fetchData();
       this.recieved = true;
+      this.input = "";
     }
   }
 };
@@ -52,5 +53,10 @@ export default {
   height: 600px;
   opacity: 0.8;
   border-radius: 10px;
+  padding: 20px;
+}
+
+.enterLocation {
+  color: white;
 }
 </style>
