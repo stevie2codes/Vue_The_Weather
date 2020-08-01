@@ -2,9 +2,7 @@
   <div>
     <form @submit.prevent="processInput">
       <input type="text" v-model="input" name="input" placeholder="Enter a location" />
-      <button type="submit">
-        <v-icon name="search" class="searchIcon" />
-      </button>
+      <button type="submit"></button>
     </form>
     <h1>{{currentWeather}}</h1>
   </div>
