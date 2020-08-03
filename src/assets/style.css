@@ -1,6 +1,7 @@
 body {
-  background: url("../assets/rodrigo-soares-c6SciRp2kaQ-unsplash.jpg");
+  background: url("../assets/backgroundWeather.jpg");
   background-size: cover;
-  height: 100vmax;
+  height: 100vh;
+  background-repeat: no-repeat;
   overflow: hidden;
 }

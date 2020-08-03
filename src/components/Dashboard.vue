@@ -3,23 +3,29 @@
     <form @submit.prevent="processInput">
       <input type="text" v-model="input" name="input" placeholder="Enter a location" />
     </form>
-
-    <div v-if="recieved" class="currentWrapper">
+    <FiveDay />
+    <div class="locDate">
       <h1 v-if="recieved" class="location">
         {{location.
         name}},{{location.region}}
       </h1>
-      <h3 v-if="recieved" class="temp">{{weather.temp_f}}&deg; F</h3>
-      <h3 v-if="recieved">Feels Like {{weather.feelslike_f}}&deg; F</h3>
+    </div>
+    <div v-if="recieved" class="currentWrapper">
+      <h3 v-if="recieved" class="temp">{{weather.temp_f}}&deg;</h3>
+
       <div class="dataWrap">
-        <h3 v-if="recieved">{{weather.condition.text}}</h3>
+        <h3 v-if="recieved">{{current.text}}</h3>
         <div :style="styles" class="icon"></div>
       </div>
+      <h3 v-if="recieved" class="feels">Feels Like {{weather.feelslike_f}}&deg; F</h3>
+      <h3 v-if="recieved" class="feels">Humidity {{weather.humidity}}%</h3>
+      <h4 v-if="recieved" class="feels">Wind speed {{weather.wind_mph}} Mph</h4>
     </div>
   </div>
 </template>
 
 <script>
+import FiveDay from "../components/FiveDay";
 export default {
   name: "Dashboard",
 
@@ -27,6 +33,7 @@ export default {
     return {
       location: {},
       weather: {},
+      current: {},
       input: "",
       recieved: false
     };
@@ -34,7 +41,7 @@ export default {
   computed: {
     styles() {
       return {
-        background: `url(${this.weather.condition.icon})`
+        background: `url(${this.current.icon})`
       };
     }
   },
@@ -48,6 +55,7 @@ export default {
         const location = await res.json();
         this.location = location.location;
         this.weather = location.current;
+        this.current = this.weather.condition;
       } catch (e) {
         console.log(e);
       }
@@ -57,26 +65,39 @@ export default {
       this.recieved = true;
       this.input = "";
     }
+  },
+  components: {
+    FiveDay
   }
 };
 </script>
 
 <style lang="css" scoped>
+.locDate {
+  position: absolute;
+  left: 25px;
+  bottom: 80%;
+}
+.feels,
+.time {
+  text-align: left;
+  margin: 5px;
+}
 .location {
   font-size: 3vh;
 }
 .temp {
-  font-size: 5vh;
+  font-size: 20vmin;
   margin: 0;
 }
 .dataWrap {
   display: flex;
   flex-direction: row;
+  margin: 0;
   justify-content: center;
 }
 .icon {
   width: 60px;
-  height: 60px;
 }
 form {
   position: fixed;
@@ -101,13 +122,16 @@ input:active {
   background: transparent;
 }
 .currentWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
   background: rgba(0, 0, 0, 0.5);
-  width: 60%;
-  height: 40%;
+  width: 50vmin;
+  height: auto;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  bottom: 25px;
+  left: 25px;
   box-shadow: 0 0 32px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   padding: 20px;
