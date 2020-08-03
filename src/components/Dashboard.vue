@@ -2,12 +2,19 @@
   <div>
     <form @submit.prevent="processInput">
       <input type="text" v-model="input" name="input" placeholder="Enter a location" />
-      <button type="submit">Submit</button>
     </form>
-    <h1 class="enterLocation" v-show="!recieved">Enter a Location</h1>
-    <div v-show="recieved" class="currentWrapper">
-      <h1 v-if="recieved">{{currentWeather.location.name}},{{currentWeather.location.region}}</h1>
-      <h3 v-if="recieved">{{currentWeather.current.temp_f}}degrees</h3>
+
+    <div v-if="recieved" class="currentWrapper">
+      <h1 v-if="recieved" class="location">
+        {{location.
+        name}},{{location.region}}
+      </h1>
+      <h3 v-if="recieved" class="temp">{{weather.temp_f}}&deg; F</h3>
+      <h3 v-if="recieved">Feels Like {{weather.feelslike_f}}&deg; F</h3>
+      <div class="dataWrap">
+        <h3 v-if="recieved">{{weather.condition.text}}</h3>
+        <div :style="styles" class="icon"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -18,10 +25,18 @@ export default {
 
   data() {
     return {
-      currentWeather: {},
+      location: {},
+      weather: {},
       input: "",
       recieved: false
     };
+  },
+  computed: {
+    styles() {
+      return {
+        background: `url(${this.weather.condition.icon})`
+      };
+    }
   },
 
   methods: {
@@ -30,8 +45,9 @@ export default {
         const res = await fetch(
           `http://api.weatherapi.com/v1/current.json?key=484a4fd44fb94f04b3a191835200108&q=${this.input}`
         );
-        const currentWeather = await res.json();
-        this.currentWeather = currentWeather;
+        const location = await res.json();
+        this.location = location.location;
+        this.weather = location.current;
       } catch (e) {
         console.log(e);
       }
@@ -46,17 +62,56 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.currentWrapper {
-  background-color: white;
-  width: 500px;
-  margin: auto;
-  height: 600px;
-  opacity: 0.8;
-  border-radius: 10px;
-  padding: 20px;
+.location {
+  font-size: 3vh;
 }
-
-.enterLocation {
+.temp {
+  font-size: 5vh;
+  margin: 0;
+}
+.dataWrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.icon {
+  width: 60px;
+  height: 60px;
+}
+form {
+  position: fixed;
+  top: 40px;
+  left: 25px;
+}
+input {
+  background: transparent;
+  border: none;
+  font-size: 4vh;
+  color: black;
+}
+input::placeholder {
+  color: rgba(245, 245, 245, 0.575);
+  font-family: "Questrial", sans-serif;
+}
+input:focus,
+input:active {
+  outline-style: none;
+  box-shadow: none;
+  border-color: transparent;
+  background: transparent;
+}
+.currentWrapper {
+  background: rgba(0, 0, 0, 0.5);
+  width: 60%;
+  height: 40%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 20px;
+  overflow: hidden;
   color: white;
 }
 </style>
