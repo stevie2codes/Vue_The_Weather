@@ -1,7 +1,14 @@
-body {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: scroll;
+}
+
+#app {
   background: url("../assets/backgroundWeather.jpg");
   background-size: cover;
-  height: 100vh;
-  background-repeat: no-repeat;
-  overflow: hidden;
+  background-position: bottom;
+  min-height: 100vh;
+  font-family: "Questrial", sans-serif;
 }
