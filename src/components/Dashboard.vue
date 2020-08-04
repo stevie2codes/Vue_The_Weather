@@ -64,7 +64,7 @@ export default {
     fetchData: async function() {
       try {
         const res = await fetch(
-          `http://api.weatherapi.com/v1/current.json?key=484a4fd44fb94f04b3a191835200108&q=${this.input}`
+          `https://api.weatherapi.com/v1/current.json?key=484a4fd44fb94f04b3a191835200108&q=${this.input}`
         );
         const location = await res.json();
         this.location = location.location;
