@@ -10,13 +10,13 @@
             {{location.
             name}},{{location.region}}
           </h1>
-          <div class="date">Todays date</div>
+          <div class="date">{{dateBuilder()}}</div>
         </div>
         <div v-if="recieved" class="currentWrapper">
           <h3 v-if="recieved" class="temp">{{Math.round(weather.temp_f)}}&deg;</h3>
 
           <div class="dataWrap">
-            <h3 v-if="recieved">{{current.text}}</h3>
+            <h3 v-if="recieved" class="currentWeather">{{current.text}}</h3>
             <div :style="styles" class="icon"></div>
           </div>
           <h3 v-if="recieved" class="feels">Feels Like {{weather.feelslike_f}}&deg; F</h3>
@@ -73,6 +73,37 @@ export default {
       } catch (e) {
         console.log(e);
       }
+    },
+    dateBuilder: function() {
+      let d = new Date();
+      let months = [
+        "January",
+        "Febuary",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ];
+      let days = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ];
+      let day = days[d.getDay()];
+      let date = d.getDate();
+      let month = months[d.getMonth()];
+      let year = d.getFullYear();
+      return `${day} ${date} ${month} ${year}`;
     },
     processInput: function() {
       this.fetchData();
@@ -132,7 +163,9 @@ main {
   padding-bottom: 20px;
 }
 .temp {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+
   padding: 10px 25px;
   color: #fefefe;
   font-size: 102px;
@@ -140,12 +173,18 @@ main {
   text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
 }
 .dataWrap {
-  display: inline-flex;
-  flex-direction: row;
-  padding: 10px 0px;
+  display: flex;
   justify-content: center;
-  height: auto;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
+}
+.dataWrap .currentWeather {
+  color: #fefefe;
+  font-size: 38px;
+  font-weight: bold;
+  font-style: italic;
+  text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
 }
 .icon {
   width: 60px;
@@ -160,7 +199,7 @@ form {
 input {
   width: 20vmax;
   display: block;
-  padding: 15px;
+  padding: 10px;
   color: #313131;
   font-size: 20px;
   border: none;
@@ -191,10 +230,10 @@ input:active {
 }
 .currentWrapper {
   background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 16px;
+  border-radius: 8px;
   margin: 30px 0;
   box-shadow: 3px 6px 10px rgba(0, 0, 0, 0.25);
-  padding: 20px 40px;
+  padding: 20px 80px;
   color: #fefefe;
 }
 
@@ -205,14 +244,23 @@ input:active {
   flex-wrap: wrap;
 }
 .forecastWrap .day {
-  background: rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  margin: 5px;
-  color: white;
-  width: 200px;
-  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  margin: 10px 10px;
+  box-shadow: 3px 6px 10px rgba(0, 0, 0, 0.25);
+  padding: 20px 30px;
+  color: #fefefe;
 }
 .hiTemp {
   font-weight: bold;
+}
+.hiTemp,
+.lowTemp,
+.dates {
+  margin: 10px 0px;
+}
+.dates {
+  border-bottom: 0.5px solid white;
+  padding-bottom: 5px;
 }
 </style>
