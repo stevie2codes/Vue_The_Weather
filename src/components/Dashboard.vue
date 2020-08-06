@@ -2,7 +2,7 @@
   <main>
     <div>
       <form @submit.prevent="processInput">
-        <input type="text" v-model="input" name="input" placeholder="Search.." />
+        <input type="text" v-model="input" name="input" placeholder="Search..." />
       </form>
       <h1 class="title animate__animated animate__zoomInUp" v-if="!recieved">VUE The Weather</h1>
       <div class="container">
