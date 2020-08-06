@@ -1,24 +1,4 @@
 # vue_the_weather
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Getting familiar with vue. Using the weather API to fetch current data and
+anothor call for a 3 day forecast.
