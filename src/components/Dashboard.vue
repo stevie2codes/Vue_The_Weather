@@ -4,6 +4,7 @@
       <form @submit.prevent="processInput">
         <input type="text" v-model="input" name="input" placeholder="Search.." />
       </form>
+      <h1 class="title animate__animated animate__zoomInUp" v-if="!recieved">VUE The Weather</h1>
       <div class="container">
         <div class="locDate">
           <h1 v-if="recieved" class="location">
@@ -12,7 +13,8 @@
           </h1>
           <div class="date">{{dateBuilder()}}</div>
         </div>
-        <div v-if="recieved" class="currentWrapper">
+
+        <div v-if="recieved" class="currentWrapper animate__animated animate__slideInLeft">
           <h3 v-if="recieved" class="temp">{{Math.round(weather.temp_f)}}&deg;</h3>
 
           <div class="dataWrap">
@@ -28,9 +30,14 @@
         <div class="forecastWrap">
           <div v-for="(data,index) in forecast" :key="index" class="day">
             <h4 class="dates">{{data.date}}</h4>
-            <p class="hiTemp">Hi {{Math.round(data.day.maxtemp_f)}}</p>
-            <p class="lowTemp">Low {{Math.round(data.day.mintemp_f)}}</p>
+            <div class="hiLowWrap">
+              <p class="hiTemp">Hi {{Math.round(data.day.maxtemp_f)}}&deg;</p>
+              <p class="lowTemp">Low {{Math.round(data.day.mintemp_f)}}&deg;</p>
+            </div>
+            <p>{{data.day.condition.text}}</p>
             <p>Chance of rain {{data.day.daily_chance_of_rain}}%</p>
+            <p>Sunrise {{data.astro.sunrise}}</p>
+            <p>Sunset {{data.astro.sunset}}</p>
           </div>
         </div>
       </div>
@@ -74,6 +81,7 @@ export default {
         console.log(e);
       }
     },
+
     dateBuilder: function() {
       let d = new Date();
       let months = [
@@ -132,6 +140,15 @@ main {
   );
   height: 100vh;
   padding: 20px;
+}
+.title {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fefefe;
+  text-shadow: 1px 3px rgba(0, 0, 0, 0.55);
+  font-size: 5rem;
 }
 .container {
   display: flex;
@@ -197,7 +214,7 @@ form {
   display: flex;
 }
 input {
-  width: 20vmax;
+  width: 30vmax;
   display: block;
   padding: 10px;
   color: #313131;
@@ -248,16 +265,24 @@ input:active {
   border-radius: 8px;
   margin: 10px 10px;
   box-shadow: 3px 6px 10px rgba(0, 0, 0, 0.25);
-  padding: 20px 30px;
+  padding: 20px 50px;
   color: #fefefe;
 }
-.hiTemp {
+.hiTemp,
+.lowTemp {
   font-weight: bold;
+  font-size: 1.2rem;
 }
 .hiTemp,
 .lowTemp,
-.dates {
+.dates,
+p {
   margin: 10px 0px;
+}
+.hiLowWrap {
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.25);
+  padding: 10px;
+  border-radius: 10px;
 }
 .dates {
   border-bottom: 0.5px solid white;
