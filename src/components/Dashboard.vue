@@ -30,6 +30,7 @@
         <div class="forecastWrap">
           <div v-for="(data,index) in forecast" :key="index" class="day">
             <h4 class="dates">{{data.date}}</h4>
+            <div :style="iconStyles" class="icon"></div>
             <div class="hiLowWrap">
               <p class="hiTemp">Hi {{Math.round(data.day.maxtemp_f)}}&deg;</p>
               <p class="lowTemp">Low {{Math.round(data.day.mintemp_f)}}&deg;</p>
@@ -64,6 +65,12 @@ export default {
     styles() {
       return {
         background: `url(${this.current.icon})`
+      };
+    },
+    iconStyles() {
+      return {
+        background: `url(${this.forecast[0].day.condition.icon})`,
+        margin: `auto`
       };
     }
   },
@@ -205,8 +212,8 @@ main {
   text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
 }
 .icon {
-  width: 60px;
-  height: 60px;
+  width: 65px;
+  height: 65px;
 }
 form {
   width: 100%;
