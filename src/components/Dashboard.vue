@@ -61,6 +61,7 @@ export default {
       recieved: false
     };
   },
+
   computed: {
     styles() {
       return {
