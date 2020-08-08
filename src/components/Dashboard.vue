@@ -151,6 +151,7 @@ export default {
       return `${day} ${date} ${month} ${year}`;
     },
     processInput: function() {
+      if (!this.input) return;
       this.fetchData();
       this.fetchForecast();
       this.recieved = true;
