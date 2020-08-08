@@ -18,9 +18,13 @@
           <i class="fas fa-search" aria-label="submit search"></i>
         </button>
       </form>
-      <h1 class="title animate__animated animate__zoomInUp" v-if="!recieved">
-        VUE The Weather
-      </h1>
+
+      <img
+        class="title animate__animated animate__zoomInUp"
+        v-if="!recieved"
+        src="../assets/WeatherLogo.png"
+        alt="Logo"
+      />
       <div class="container">
         <div class="locDate">
           <h1 v-if="recieved" class="location">
@@ -146,7 +150,7 @@ export default {
         "Saturday",
         "Sunday"
       ];
-      let day = days[d.getDay()];
+      let day = days[d.getDay() - 1];
       let date = d.getDate();
       let month = months[d.getMonth()];
       let year = d.getFullYear();
@@ -182,7 +186,7 @@ export default {
 }
 .search-bar {
   --size: 60px;
-  border: 2px solid rgb(255, 79, 79);
+  border: 2px solid #41b883;
   display: flex;
   border-radius: 50px;
   height: var(--size);
@@ -206,6 +210,9 @@ export default {
     left: 0;
     line-height: calc(var(--size) -3px);
     cursor: pointer;
+    &::placeholder {
+      color: #34495e;
+    }
     &:focus {
       outline: 0;
     }
@@ -220,6 +227,7 @@ export default {
     height: calc(var(--size) - 10px);
     margin-left: auto;
     transition: background 150ms ease-in-out;
+    color: #212f3c;
   }
   &:focus-within {
     width: 50vmax;
@@ -232,7 +240,7 @@ export default {
     }
 
     .search-bar__submit {
-      background: rgb(255, 79, 79);
+      background: #41b883;
       color: white;
 
       &:focus,
