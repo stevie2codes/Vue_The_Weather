@@ -9,7 +9,8 @@
 #app {
   background: url("../assets/beach\ \(1\).jpg");
   background-size: cover;
-  background-position: bottom;
+  background-position: inherit;
   min-height: 100vh;
-  font-family: "Questrial", sans-serif;
+
+  font-family: "Open Sans", sans-serif;
 }

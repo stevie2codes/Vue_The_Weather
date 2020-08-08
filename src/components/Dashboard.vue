@@ -182,7 +182,7 @@ export default {
 }
 .search-bar {
   --size: 60px;
-  border: 2px solid tomato;
+  border: 2px solid rgb(255, 79, 79);
   display: flex;
   border-radius: 50px;
   height: var(--size);
@@ -194,6 +194,7 @@ export default {
   margin: 30px auto;
 
   &__input {
+    color: #fefefe;
     flex-grow: 1;
     font-size: 1.5rem;
     padding: 0 0.5em;
@@ -221,7 +222,7 @@ export default {
     transition: background 150ms ease-in-out;
   }
   &:focus-within {
-    width: 100%;
+    width: 50vmax;
 
     .search-bar__input {
       opacity: 1;
@@ -231,7 +232,7 @@ export default {
     }
 
     .search-bar__submit {
-      background: tomato;
+      background: rgb(255, 79, 79);
       color: white;
 
       &:focus,
@@ -258,8 +259,9 @@ main {
   left: 50%;
   transform: translate(-50%, -50%);
   color: #fefefe;
-  text-shadow: 1px 3px rgba(0, 0, 0, 0.55);
+  text-shadow: 3px 10px 10px rgba(0, 0, 0, 0.25);
   font-size: 5rem;
+  font-family: "Montserrat", sans-serif;
 }
 .container {
   display: flex;
@@ -272,13 +274,14 @@ main {
 .time {
   text-align: center;
   padding: 10px 0px;
+  font-family: "Montserrat", sans-serif;
 }
 .location {
   color: #fefefe;
   font-size: 32px;
   font-weight: 500;
   text-align: center;
-  text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
+  text-shadow: 3px 10px 10px rgba(0, 0, 0, 0.25);
   padding: 20px;
 }
 
@@ -297,7 +300,7 @@ main {
   color: #fefefe;
   font-size: 102px;
   font-weight: 900;
-  text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+  text-shadow: 3px 10px 10px rgba(0, 0, 0, 0.25);
 }
 .dataWrap {
   display: flex;
@@ -311,7 +314,7 @@ main {
   font-size: 38px;
   font-weight: bold;
   font-style: italic;
-  text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+  text-shadow: 3px 10px 10px rgba(0, 0, 0, 0.25);
 }
 .icon {
   width: 65px;
@@ -319,11 +322,10 @@ main {
 }
 
 .currentWrapper {
-  background-color: rgba(0, 0, 0, 0.5);
+  background: none;
   border-radius: 8px;
-  margin: 30px 0;
-  box-shadow: 3px 6px 10px rgba(0, 0, 0, 0.25);
-  padding: 20px 80px;
+  margin: 0;
+  padding: 10px 80px;
   color: #fefefe;
 }
 
@@ -332,9 +334,10 @@ main {
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
+  padding: 20px;
 }
 .forecastWrap .day {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   margin: 10px 10px;
   box-shadow: 3px 6px 10px rgba(0, 0, 0, 0.25);
@@ -346,13 +349,15 @@ main {
   font-weight: bold;
   font-size: 1.2rem;
   padding-left: 5px;
+
+  font-family: "Open Sans", sans-serif;
 }
 .hiTemp,
 .lowTemp,
 .dates,
 p {
   margin: 10px 0px;
-  font-family: "Questrial", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 .hiLowWrap {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25),
@@ -365,5 +370,7 @@ p {
 .dates {
   border-bottom: 0.5px solid white;
   padding-bottom: 5px;
+  font-size: 1.5rem;
+  font-family: "Montserrat", sans-serif;
 }
 </style>
