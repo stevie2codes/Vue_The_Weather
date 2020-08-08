@@ -58,10 +58,12 @@
             <h4 class="dates">{{ data.date }}</h4>
             <div :style="iconStyles" class="icon"></div>
             <div class="hiLowWrap">
-              <p class="hiTemp">Hi {{ Math.round(data.day.maxtemp_f) }}&deg;</p>
-              <p class="lowTemp">
-                Low {{ Math.round(data.day.mintemp_f) }}&deg;
-              </p>
+              <i class="fas fa-arrow-up">
+                <p class="hiTemp">{{ Math.round(data.day.maxtemp_f) }}&deg;</p>
+              </i>
+              <i class="fas fa-arrow-down">
+                <p class="lowTemp">{{ Math.round(data.day.mintemp_f) }}&deg;</p>
+              </i>
             </div>
             <p>{{ data.day.condition.text }}</p>
             <p>Chance of rain {{ data.day.daily_chance_of_rain }}%</p>
@@ -291,7 +293,6 @@ main {
 .temp {
   display: flex;
   justify-content: center;
-
   padding: 10px 25px;
   color: #fefefe;
   font-size: 102px;
@@ -344,17 +345,22 @@ main {
 .lowTemp {
   font-weight: bold;
   font-size: 1.2rem;
+  padding-left: 5px;
 }
 .hiTemp,
 .lowTemp,
 .dates,
 p {
   margin: 10px 0px;
+  font-family: "Questrial", sans-serif;
 }
 .hiLowWrap {
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.25);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25),
+    0px 0px 10px -5px rgba(255, 255, 255, 0.25);
   padding: 10px;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
 }
 .dates {
   border-bottom: 0.5px solid white;
