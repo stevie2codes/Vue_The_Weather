@@ -1,11 +1,7 @@
 <template>
   <main>
     <div>
-      <form
-        @submit.prevent="processInput"
-        class="search-bar"
-        autocomplete="off"
-      >
+      <form @submit.prevent="processInput" class="search-bar" autocomplete="off">
         <input
           type="text"
           v-model="input"
@@ -22,38 +18,25 @@
       <img
         class="title animate__animated animate__zoomInUp"
         v-if="!recieved"
-        src="../assets/WeatherLogo.png"
+        src="../assets/WeatherLogo.svg"
         alt="Logo"
       />
       <div class="container">
         <div class="locDate">
-          <h1 v-if="recieved" class="location">
-            {{ location.name }},{{ location.region }}
-          </h1>
+          <h1 v-if="recieved" class="location">{{ location.name }},{{ location.region }}</h1>
           <div class="date">{{ dateBuilder() }}</div>
         </div>
 
-        <div
-          v-if="recieved"
-          class="currentWrapper animate__animated animate__slideInLeft"
-        >
-          <h3 v-if="recieved" class="temp">
-            {{ Math.round(weather.temp_f) }}&deg;
-          </h3>
+        <div v-if="recieved" class="currentWrapper animate__animated animate__slideInLeft">
+          <h3 v-if="recieved" class="temp">{{ Math.round(weather.temp_f) }}&deg;</h3>
 
           <div class="dataWrap">
             <h3 v-if="recieved" class="currentWeather">{{ current.text }}</h3>
             <div :style="styles" class="icon"></div>
           </div>
-          <h3 v-if="recieved" class="feels">
-            Feels Like {{ weather.feelslike_f }}&deg; F
-          </h3>
-          <h3 v-if="recieved" class="feels">
-            Humidity {{ weather.humidity }}%
-          </h3>
-          <h4 v-if="recieved" class="feels">
-            Wind speed {{ weather.wind_mph }} Mph
-          </h4>
+          <h3 v-if="recieved" class="feels">Feels Like {{ weather.feelslike_f }}&deg; F</h3>
+          <h3 v-if="recieved" class="feels">Humidity {{ weather.humidity }}%</h3>
+          <h4 v-if="recieved" class="feels">Wind speed {{ weather.wind_mph }} Mph</h4>
         </div>
 
         <!-- Forecast -->
@@ -186,7 +169,7 @@ export default {
 }
 .search-bar {
   --size: 60px;
-  border: 2px solid #41b883;
+  border: 2px solid #212121;
   display: flex;
   border-radius: 50px;
   height: var(--size);
@@ -227,11 +210,11 @@ export default {
     height: calc(var(--size) - 10px);
     margin-left: auto;
     transition: background 150ms ease-in-out;
-    color: #212f3c;
+    color: #fefefe;
   }
   &:focus-within {
     width: 50vmax;
-
+    border: 2px solid white;
     .search-bar__input {
       opacity: 1;
       cursor: initial;
@@ -240,8 +223,8 @@ export default {
     }
 
     .search-bar__submit {
-      background: #41b883;
-      color: white;
+      /* background: white; */
+      color: #212121;
 
       &:focus,
       &:hover {
