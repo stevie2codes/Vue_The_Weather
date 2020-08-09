@@ -133,7 +133,7 @@ export default {
         "Saturday",
         "Sunday"
       ];
-      let day = days[d.getDay() - 1];
+      let day = days[d.getDay()];
       let date = d.getDate();
       let month = months[d.getMonth()];
       let year = d.getFullYear();
@@ -253,6 +253,7 @@ main {
   text-shadow: 3px 10px 10px rgba(0, 0, 0, 0.25);
   font-size: 5rem;
   font-family: "Montserrat", sans-serif;
+  padding: 20px 0px;
 }
 .container {
   display: flex;
