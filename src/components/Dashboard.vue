@@ -28,15 +28,15 @@
         </div>
 
         <div v-if="recieved" class="currentWrapper animate__animated animate__slideInLeft">
-          <h3 v-if="recieved" class="temp">{{ Math.round(weather.temp_f) }}&deg;</h3>
+          <h3 class="temp">{{ Math.round(weather.temp_f) }}&deg;</h3>
 
           <div class="dataWrap">
-            <h3 v-if="recieved" class="currentWeather">{{ current.text }}</h3>
+            <h3 class="currentWeather">{{ current.text }}</h3>
             <div :style="styles" class="icon"></div>
           </div>
-          <h3 v-if="recieved" class="feels">Feels Like {{ weather.feelslike_f }}&deg; F</h3>
-          <h3 v-if="recieved" class="feels">Humidity {{ weather.humidity }}%</h3>
-          <h4 v-if="recieved" class="feels">Wind speed {{ weather.wind_mph }} Mph</h4>
+          <h3 class="feels">Feels Like {{ weather.feelslike_f }}&deg; F</h3>
+          <h3 class="feels">Humidity {{ weather.humidity }}%</h3>
+          <h4 class="feels">Wind speed {{ weather.wind_mph }} Mph</h4>
         </div>
 
         <!-- Forecast -->
@@ -363,5 +363,22 @@ p {
   padding-bottom: 5px;
   font-size: 1.5rem;
   font-family: "Montserrat", sans-serif;
+}
+
+.loader {
+  width: 200px;
+  height: 200px;
+  border: 4px solid #41b883;
+  background: transparent;
+  animation: load 4s infinite forwards;
+}
+
+@keyframes load {
+  0% {
+    transform: rotate(0deg) scale(0);
+  }
+  100% {
+    transform: rotate(360deg), scale(1);
+  }
 }
 </style>
