@@ -26,38 +26,40 @@
           <h1 v-if="recieved" class="location">{{ location.name }},{{ location.region }}</h1>
           <div class="date">{{ dateBuilder() }}</div>
         </div>
+        <div v-if="!isLoading">
+          <div v-if="recieved" class="currentWrapper animate__animated animate__slideInLeft">
+            <h3 class="temp">{{ Math.round(weather.temp_f) }}&deg;</h3>
 
-        <div v-if="recieved" class="currentWrapper animate__animated animate__slideInLeft">
-          <h3 class="temp">{{ Math.round(weather.temp_f) }}&deg;</h3>
-
-          <div class="dataWrap">
-            <h3 class="currentWeather">{{ current.text }}</h3>
-            <div :style="styles" class="icon"></div>
-          </div>
-          <h3 class="feels">Feels Like {{ weather.feelslike_f }}&deg; F</h3>
-          <h3 class="feels">Humidity {{ weather.humidity }}%</h3>
-          <h4 class="feels">Wind speed {{ weather.wind_mph }} Mph</h4>
-        </div>
-
-        <!-- Forecast -->
-        <div class="forecastWrap">
-          <div v-for="(data, index) in forecast" :key="index" class="day">
-            <h4 class="dates">{{ data.date }}</h4>
-            <div :style="iconStyles" class="icon"></div>
-            <div class="hiLowWrap">
-              <i class="fas fa-arrow-up">
-                <p class="hiTemp">{{ Math.round(data.day.maxtemp_f) }}&deg;</p>
-              </i>
-              <i class="fas fa-arrow-down">
-                <p class="lowTemp">{{ Math.round(data.day.mintemp_f) }}&deg;</p>
-              </i>
+            <div class="dataWrap">
+              <h3 class="currentWeather">{{ current.text }}</h3>
+              <div :style="styles" class="icon"></div>
             </div>
-            <p>{{ data.day.condition.text }}</p>
-            <p>Chance of rain {{ data.day.daily_chance_of_rain }}%</p>
-            <p>Sunrise {{ data.astro.sunrise }}</p>
-            <p>Sunset {{ data.astro.sunset }}</p>
+            <h3 class="feels">Feels Like {{ weather.feelslike_f }}&deg; F</h3>
+            <h3 class="feels">Humidity {{ weather.humidity }}%</h3>
+            <h4 class="feels">Wind speed {{ weather.wind_mph }} Mph</h4>
+          </div>
+
+          <!-- Forecast -->
+          <div class="forecastWrap">
+            <div v-for="(data, index) in forecast" :key="index" class="day">
+              <h4 class="dates">{{ data.date }}</h4>
+              <div :style="iconStyles" class="icon"></div>
+              <div class="hiLowWrap">
+                <i class="fas fa-arrow-up">
+                  <p class="hiTemp">{{ Math.round(data.day.maxtemp_f) }}&deg;</p>
+                </i>
+                <i class="fas fa-arrow-down">
+                  <p class="lowTemp">{{ Math.round(data.day.mintemp_f) }}&deg;</p>
+                </i>
+              </div>
+              <p>{{ data.day.condition.text }}</p>
+              <p>Chance of rain {{ data.day.daily_chance_of_rain }}%</p>
+              <p>Sunrise {{ data.astro.sunrise }}</p>
+              <p>Sunset {{ data.astro.sunset }}</p>
+            </div>
           </div>
         </div>
+        <div v-else class="loader"></div>
       </div>
     </div>
   </main>
@@ -75,7 +77,8 @@ export default {
       forecast: [],
       current: {},
       input: "",
-      recieved: false
+      recieved: false,
+      isLoading: false
     };
   },
 
@@ -95,11 +98,13 @@ export default {
 
   methods: {
     fetchData: async function() {
+      this.isLoading = true;
       try {
         const res = await fetch(
           `https://api.weatherapi.com/v1/current.json?key=${this.key}&q=${this.input}`
         );
         const location = await res.json();
+        this.isLoading = false;
         this.location = location.location;
         this.weather = location.current;
         this.current = this.weather.condition;
