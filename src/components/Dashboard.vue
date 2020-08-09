@@ -246,9 +246,9 @@ main {
 }
 .title {
   position: fixed;
-  top: 50%;
+  top: 55%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -55%);
   color: #fefefe;
   text-shadow: 3px 10px 10px rgba(0, 0, 0, 0.25);
   font-size: 5rem;
