@@ -23,7 +23,7 @@
       />
       <div class="container">
         <div class="locDate">
-          <h1 v-if="recieved" class="location">{{ location.name }},{{ location.region }}</h1>
+          <h1 v-if="recieved" class="location">{{ location.name}} {{ location.region }}</h1>
           <div class="date">{{ dateBuilder() }}</div>
         </div>
         <div v-if="!isLoading">
@@ -59,7 +59,9 @@
             </div>
           </div>
         </div>
-        <div v-else class="loader"></div>
+        <div v-else class="loader">
+          <h1 class="loadingText">Loading</h1>
+        </div>
       </div>
     </div>
   </main>
@@ -377,14 +379,21 @@ p {
   border: 4px solid #41b883;
   background: transparent;
   animation: load 4s infinite forwards;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loadingText {
+  font-size: 1.5rem;
+  color: #fefefe;
 }
 
 @keyframes load {
   0% {
-    transform: rotate(0deg) scale(0);
+    transform: rotate(0deg) scale(0.5);
   }
   100% {
-    transform: rotate(360deg), scale(1);
+    transform: rotate(360deg) scale(1);
   }
 }
 </style>
